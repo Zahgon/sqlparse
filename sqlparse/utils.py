@@ -67,13 +67,7 @@ def recurse(*cls):
     :return: function
     """
     def wrap(f):
-        def wrapped_f(tlist):
-            for sgroup in tlist.get_sublists():
-                if not isinstance(sgroup, cls):
-                    wrapped_f(sgroup)
-            f(tlist)
-
-        return wrapped_f
+        pass
 
     return wrap
 

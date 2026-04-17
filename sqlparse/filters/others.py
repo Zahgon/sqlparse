@@ -88,38 +88,14 @@ class StripWhitespaceFilter:
 
     @staticmethod
     def _stripws_default(tlist):
-        last_was_ws = False
-        is_first_char = True
-        for token in tlist.tokens:
-            if token.is_whitespace:
-                token.value = '' if last_was_ws or is_first_char else ' '
-            last_was_ws = token.is_whitespace
-            is_first_char = False
+        pass
 
     def _stripws_identifierlist(self, tlist):
         # Removes newlines before commas, see issue140
-        last_nl = None
-        for token in list(tlist.tokens):
-            if last_nl and token.ttype is T.Punctuation and token.value == ',':
-                tlist.tokens.remove(last_nl)
-            last_nl = token if token.is_whitespace else None
-
-            # next_ = tlist.token_next(token, skip_ws=False)
-            # if (next_ and not next_.is_whitespace and
-            #             token.ttype is T.Punctuation and token.value == ','):
-            #     tlist.insert_after(token, sql.Token(T.Whitespace, ' '))
-        return self._stripws_default(tlist)
+        pass
 
     def _stripws_parenthesis(self, tlist):
-        while tlist.tokens[1].is_whitespace:
-            tlist.tokens.pop(1)
-        while tlist.tokens[-2].is_whitespace:
-            tlist.tokens.pop(-2)
-        if tlist.tokens[-2].is_group:
-            # save to remove the last whitespace
-            while tlist.tokens[-2].tokens[-1].is_whitespace:
-                tlist.tokens[-2].tokens.pop(-1)
-        self._stripws_default(tlist)
+        pass
 
     def process(self, stmt, depth=0):
         [self.process(sgroup, depth + 1) for sgroup in stmt.get_sublists()]

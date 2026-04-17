@@ -58,11 +58,7 @@ def format(sql: str, encoding: Optional[str] = None, **options: Any) -> str:
 
     :returns: The formatted SQL statement as string.
     """
-    stack = engine.FilterStack()
-    options = formatter.validate_options(options)
-    stack = formatter.build_filter_stack(stack, options)
-    stack.postprocess.append(filters.SerializerUnicode())
-    return "".join(stack.run(sql, encoding))
+    pass
 
 
 def split(
